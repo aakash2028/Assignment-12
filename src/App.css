@@ -1,0 +1,12 @@
+table {
+  margin-top: 10px;
+}
+
+th, td {
+  text-align: center;
+}
+
+form {
+  max-width: 300px;
+  width: 100%;
+}
