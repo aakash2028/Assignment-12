@@ -1,5 +1,5 @@
 import React from 'react';
-class SearchBox extends React.Component {
+class Filter extends React.Component {
   constructor(props) {
     super(props);
     this.handleChange = this.handleChange.bind(this)
@@ -17,4 +17,4 @@ class SearchBox extends React.Component {
   }
 }
 
-export default SearchBox;
+export default Filter;

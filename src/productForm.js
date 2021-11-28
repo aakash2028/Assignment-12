@@ -1,7 +1,7 @@
 import React from 'react';
 class ProductForm extends React.Component {
   constructor(props) {
-    const RESET_VALUES = {id: '', category: '', price: '', name: ''};
+    const RESET_VALUES = {id: '', category: '', price: '$', name: ''};
     super(props);
     this.handleSave = this.handleSave.bind(this);
     this.handleChange = this.handleChange.bind(this);
@@ -9,16 +9,49 @@ class ProductForm extends React.Component {
       product: Object.assign({}, RESET_VALUES), errors: {}
     };
   }
-
+  
   handleSave(e) {
-    const RESET_VALUES = {id: '', category: '', price: '', name: ''};
-    this.props.onSave(this.state.product)
-    this.setState({
-         product: Object.assign({}, RESET_VALUES), errors: {}
-    })
+    const RESET_VALUES = {id: '', category: '', price: '$', name: ''};
+    // this.setState ( prevState => {
+    //   let prod = prevState.product;
+    //   prod.price ='$' + prod.price
+    // }) 
+    if(this.validate()){
+      this.props.onSave(this.state.product)
+      this.setState({        
+        product: Object.assign({}, RESET_VALUES), errors: {}
+      })
+    } else {
+      alert('Enter all the fields');
+    }
+    
     e.preventDefault(); //Prevent form from triggering HTTP POST
   }
+  
+  validate = () => {
 
+    let name = this.state.product.name;
+    let category = this.state.product.category;
+    let price = this.state.product.price;
+    let errors = {}
+
+    if(name === "") {
+        errors['name'] = "name error"
+        this.setState({ errors })
+        return false
+    }  
+    if(category === "") {
+        errors['category'] = "category error"
+        this.setState({ errors })
+        return false
+    }
+    if(price === ""){
+        errors['price'] = "price error"
+        this.setState({ errors })
+        return false
+    }
+    return true;
+}
   handleChange(e) {
     const target = e.target
     const value = target.value
